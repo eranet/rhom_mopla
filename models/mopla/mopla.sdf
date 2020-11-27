@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<!-- *
+ * Copyright (c) 2018 Agility Robotics
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ * -->
+
+<sdf version="1.6">
+  <model name="mopla">
+    <plugin name="any_plugin_name" filename="librhombus_gazebo_plugin.so"/>
+
+    <link name='chassis'>
+      <pose>0 0 .1 0 0 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>.4 .2 .1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>.4 .2 .1</size>
+          </box>
+        </geometry>
+      </visual>
+      <inertial>
+        <mass>14.0</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1</iyy>
+          <iyz>0.0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+
+    </link>
+    <link name="left_front_wheel">
+      <pose>0.1 0.13 0.1 0 1.5707 1.5707</pose>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <inertial>
+        <mass>14.0</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1</iyy>
+          <iyz>0.0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="right_front_wheel">
+      <pose>0.1 -0.13 0.1 0 1.5707 1.5707</pose>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.5</mu2>
+
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <link name="left_rear_wheel">
+      <pose>-0.2 0.13 0.1 0 1.5707 1.5707</pose>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>0.5</mu2>
+
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="right_rear_wheel">
+      <pose>-0.2 -0.13 0.1 0 1.5707 1.5707</pose>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>0.5</mu2>
+              <fdir1>1 1 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>.1</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint type="revolute" name="left_front_wheel_hinge">
+      <pose>0 0 -0.03 0 0 0</pose>
+      <child>left_front_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint type="revolute" name="right_front_wheel_hinge">
+      <pose>0 0 0.03 0 0 0</pose>
+      <child>right_front_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint type="revolute" name="left_rear_wheel_hinge">
+      <pose>0 0 -0.03 0 0 0</pose>
+      <child>left_rear_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint type="revolute" name="right_rear_wheel_hinge">
+      <pose>0 0 0.03 0 0 0</pose>
+      <child>right_rear_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+</model>
+</sdf>
